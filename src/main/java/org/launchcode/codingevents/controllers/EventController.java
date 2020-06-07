@@ -2,11 +2,8 @@ package org.launchcode.codingevents.controllers;
 
 import org.launchcode.codingevents.data.EventData;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.launchcode.codingevents.models.Event;
 
 import java.util.ArrayList;
@@ -42,12 +39,14 @@ public class EventController {
 
     //lives at /events/create
     @PostMapping("create")
-    public String createEvent(@RequestParam String eventName, @RequestParam String eventDescription) {
+    public String createEvent(@ModelAttribute Event newEvent) {
 //        events.add(eventName);
-        EventData.add(new Event(eventName, eventDescription));
+        EventData.add(newEvent);
         //events.add(new Event(eventName, eventDescription));
         return "redirect:"; //300-level http response and instructs browser to redirect:/events
 
+        //old params we removed and replaced after model binding @RequestParam String eventName, @RequestParam String eventDescription
+        //EventData.add(new Event(eventName, eventDescription));
     }
 
     @GetMapping("delete")
