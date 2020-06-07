@@ -21,7 +21,7 @@
     </th:block> /-->
 
     <tr th:each="event : ${events}">
-        <td th:text="${event}"></td>
+        <td th:text="${event.name}"></td> <!--thymeleaf is using the getter methods becauase we can't access a private field-->
     </tr>
 </table>
 
