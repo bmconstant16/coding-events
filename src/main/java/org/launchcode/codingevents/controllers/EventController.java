@@ -1,5 +1,6 @@
 package org.launchcode.codingevents.controllers;
 
+import org.launchcode.codingevents.data.EventData;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,7 @@ import java.util.List;
 public class EventController {
 
 //    private static List<String> events = new ArrayList<>();
-    private static List<Event> events = new ArrayList<>();
+//    private static List<Event> events = new ArrayList<>();
     //list is coding to an interface type
 
     @GetMapping
@@ -27,7 +28,7 @@ public class EventController {
 //        events.add("FOSS4G Coding");
 //        model.addAttribute("events", events);
         model.addAttribute("title", "All Events");
-        model.addAttribute("events", events);
+        model.addAttribute("events", EventData.getAll());
         return "events/index";
 
     }
@@ -43,7 +44,8 @@ public class EventController {
     @PostMapping("create")
     public String createEvent(@RequestParam String eventName, @RequestParam String eventDescription) {
 //        events.add(eventName);
-        events.add(new Event(eventName, eventDescription));
+        EventData.add(new Event(eventName, eventDescription));
+        //events.add(new Event(eventName, eventDescription));
         return "redirect:"; //300-level http response and instructs browser to redirect:/events
 
     }
