@@ -13,7 +13,9 @@
 <table class = "table table-striped">
     <thead>
     <tr>
+        <th>ID</th>
         <th>Name</th>
+        <th>Description</th>
     </tr>
     </thead>
     <!-- <th:block th:each="event : ${events}">
@@ -21,7 +23,10 @@
     </th:block> /-->
 
     <tr th:each="event : ${events}">
+        <td th:text="${event.id}"></td>
         <td th:text="${event.name}"></td> <!--thymeleaf is using the getter methods becauase we can't access a private field-->
+        <td th:text="${event.description}"></td>
+
     </tr>
 </table>
 

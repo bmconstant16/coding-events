@@ -41,9 +41,9 @@ public class EventController {
 
     //lives at /events/create
     @PostMapping("create")
-    public String createEvent(@RequestParam String eventName) {
+    public String createEvent(@RequestParam String eventName, @RequestParam String eventDescription) {
 //        events.add(eventName);
-        events.add(new Event(eventName));
+        events.add(new Event(eventName, eventDescription));
         return "redirect:"; //300-level http response and instructs browser to redirect:/events
 
     }
