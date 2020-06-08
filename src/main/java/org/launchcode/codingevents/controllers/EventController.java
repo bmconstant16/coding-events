@@ -1,5 +1,6 @@
 package org.launchcode.codingevents.controllers;
 
+
 import org.launchcode.codingevents.data.EventData;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -64,6 +65,22 @@ public class EventController {
                 EventData.remove(id);
             }
         }
+
+        return "redirect:";
+    }
+
+    @GetMapping("edit/{eventId}")
+    public String displayEditForm(Model model, @PathVariable int eventId) {
+        model.addAttribute("event", EventData.oneEvent(eventId));
+        model.addAttribute("title", "Edit Event " + EventData.oneEvent(eventId).getName() + " id= " + eventId);
+
+        return "events/edit";
+    }
+
+    @PostMapping("edit")
+    public String processEditForm(int eventId, String name, String description){
+        EventData.oneEvent(eventId).setName(name);
+        EventData.oneEvent(eventId).setDescription(description);
 
         return "redirect:";
     }
