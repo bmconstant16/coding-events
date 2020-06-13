@@ -2,13 +2,13 @@ package org.launchcode.codingevents.controllers;
 
 
 import org.launchcode.codingevents.data.EventData;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.ui.Model;
 import org.launchcode.codingevents.models.Event;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("events")
@@ -40,7 +40,14 @@ public class EventController {
 
     //lives at /events/create
     @PostMapping("create")
-    public String createEvent(@ModelAttribute Event newEvent) {
+    public String createEvent(@ModelAttribute @Valid Event newEvent,
+                              Errors errors, Model model) {
+
+        if (errors.hasErrors()){
+            model.addAttribute("title", "Create Event");
+            model.addAttribute("errorMsg", "Bad data!");
+            return "events/create";
+        }
 //        events.add(eventName);
         EventData.add(newEvent);
         //events.add(new Event(eventName, eventDescription));
