@@ -55,7 +55,7 @@ public class EventController {
         return "redirect:"; //300-level http response and instructs browser to redirect:/events
 
         //old params we removed and replaced after model binding @RequestParam String eventName, @RequestParam String eventDescription
-        //EventData.add(new Event(eventName, eventDescription));
+        //EventData.add(new Event(eventN(ame, eventDescription));
     }
 
     @GetMapping("delete")
